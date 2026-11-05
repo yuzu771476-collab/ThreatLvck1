@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | ThreatLvck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-body">
+  <div class="login-orbit orbit-one"></div><div class="login-orbit orbit-two"></div><div class="login-grid"></div>
+  <main class="login-layout">
+    <section class="login-intro">
+      <a class="brand login-brand" href="{{ url_for('login') }}"><span class="brand-mark"><span></span><span></span><span></span></span><span>THREAT<span class="brand-accent">LVCK</span><small>URL INTELLIGENCE</small></span></a>
+      <div class="login-kicker"><span class="live-dot"></span> PRIVATE ANALYST ACCESS</div>
+      <h1>See the threat<br><em>before it strikes.</em></h1>
+      <p>A focused workspace for inspecting suspicious links, understanding risk signals and keeping your digital perimeter in view.</p>
+      <div class="login-visual"><div class="visual-ring ring-a"></div><div class="visual-ring ring-b"></div><div class="visual-core">TL<span>⌁</span></div><i class="orbit-node node-a"></i><i class="orbit-node node-b"></i><i class="orbit-node node-c"></i></div>
+      <div class="login-footnote">URL REPUTATION <b>·</b> DOMAIN INTELLIGENCE <b>·</b> RISK SCORING</div>
+    </section>
+    <section class="login-card-wrap">
+      <form class="login-card" method="post" action="{{ url_for('login') }}">
+        <div class="login-card-top"><span class="eyebrow">SECURE GATEWAY / 01</span><span class="lock-symbol">⌑</span></div>
+        <h2>Welcome back.</h2><p class="muted">Sign in to your ThreatLvck workspace.</p>
+        {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+        <label for="username">USERNAME / EMAIL</label><input id="username" name="username" type="text" placeholder="Enter your username" autocomplete="username" required>
+        <label for="password">PASSWORD</label>
+        <div class="password-wrap"><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button type="button" id="toggle-password" aria-label="Show password">SHOW</button></div>
+        <button class="primary-button login-submit" type="submit">ACCESS WORKSPACE <span>↗</span></button>
+        <div class="login-secure"><span>◈</span> LOCAL SESSION AUTHENTICATION</div>
+      </form>
+      <p class="login-copyright">THREATLVCK © 2026 · AUTHORIZED ACCESS ONLY</p>
+    </section>
+  </main>
+  <script>
+    const toggle = document.getElementById('toggle-password');
+    const password = document.getElementById('password');
+    toggle.addEventListener('click', () => {
+      const show = password.type === 'password';
+      password.type = show ? 'text' : 'password';
+      toggle.textContent = show ? 'HIDE' : 'SHOW';
+      toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+  </script>
+</body></html>

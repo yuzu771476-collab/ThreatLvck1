@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Analytics | ThreatLvck{% endblock %}
+{% block breadcrumb %}ANALYTICS{% endblock %}
+{% block content %}
+<section class="welcome-row"><div><div class="eyebrow">INTELLIGENCE / SCAN HISTORY</div><h1>Risk <span>analytics</span></h1><p class="muted">A factual view of scans recorded by this local workspace.</p></div><button class="ghost-button" id="refresh-analytics">↻ REFRESH DATA</button></section>
+<section class="stats-grid">
+  <article class="stat-card"><span>TOTAL SCANS</span><strong id="total-scans">0</strong><small>Recorded in this workspace</small></article>
+  <article class="stat-card"><span>AVERAGE RISK</span><strong id="average-score">0<small>/100</small></strong><small>Across recorded scans</small></article>
+  <article class="stat-card"><span>HIGHEST SCORE</span><strong id="highest-score">0</strong><small>Maximum recorded risk score</small></article>
+  <article class="stat-card"><span>HIGH RISK</span><strong id="high-risk-count">0</strong><small>Scores of 40 and above</small></article>
+</section>
+<section class="analytics-grid">
+  <article class="panel chart-panel"><div class="section-heading"><div><span class="eyebrow">01 / SCORE HISTORY</span><h2>Recent scan scores</h2></div><span class="subtle-count">LATEST 20</span></div><div class="chart-wrap"><canvas id="trend-chart" aria-label="Recent risk score history"></canvas><div id="trend-empty" class="chart-empty">No scan history available yet. Run a scan to create your first data point.</div></div></article>
+  <article class="panel chart-panel distribution-panel"><div class="section-heading"><div><span class="eyebrow">02 / RISK DISTRIBUTION</span><h2>Risk categories</h2></div></div><div class="donut-wrap"><canvas id="distribution-chart" aria-label="Risk category distribution"></canvas><div class="donut-center"><strong id="distribution-total">0</strong><small>SCANS</small></div></div><div class="legend-list"><span><i class="legend-dot low"></i>Lower risk <b id="lower-risk-count">0</b></span><span><i class="legend-dot medium"></i>Suspicious <b id="suspicious-count">0</b></span><span><i class="legend-dot high"></i>High risk <b id="high-risk-legend">0</b></span></div></article>
+</section>
+<section class="panel history-panel"><div class="section-heading"><div><span class="eyebrow">03 / RECENT ACTIVITY</span><h2>Scan records</h2></div><span class="subtle-count">UP TO 100 RECORDS</span></div><div class="table-scroll"><table><thead><tr><th>DESTINATION</th><th>DATE / TIME</th><th>RISK SCORE</th><th>ASSESSMENT</th></tr></thead><tbody id="history-body"><tr><td colspan="4" class="table-empty">No recorded scans yet.</td></tr></tbody></table></div></section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/analytics.js') }}" defer></script>{% endblock %}

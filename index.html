@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+{% block title %}Overview | ThreatLvck{% endblock %}
+{% block breadcrumb %}OVERVIEW{% endblock %}
+
+{% block content %}
+
+<!-- WELCOME SECTION -->
+<section class="welcome-row">
+    <div>
+        <div class="eyebrow">THREAT MONITORING / LIVE WORKSPACE</div>
+        <h1>Security <span>overview</span></h1>
+        <p class="muted">
+            Inspect a URL. Understand its signals. Make a clearer call.
+        </p>
+    </div>
+
+    <div class="welcome-chip">
+        <span class="live-dot"></span>
+        ANALYSIS ENGINE READY
+    </div>
+</section>
+
+
+<!-- SCANNER AND RISK SCORE -->
+<section class="dashboard-grid">
+
+    <!-- URL SCANNER -->
+    <div class="panel scanner-panel">
+
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">01 / URL INSPECTION</span>
+                <h2>Scan a destination</h2>
+            </div>
+            <span class="panel-symbol">⌁</span>
+        </div>
+
+        <p class="muted panel-description">
+            Submit a complete URL to inspect its structural and reputation signals.
+        </p>
+
+        <form id="scan-form" class="scan-form">
+
+            <label for="urlInput">TARGET URL</label>
+
+            <div class="scan-input-row">
+                <span class="input-prefix">↗</span>
+
+                <input
+                    id="urlInput"
+                    type="text"
+                    placeholder="https://example.com/path"
+                    autocomplete="url"
+                >
+
+                <button
+                    id="scan-button"
+                    class="primary-button"
+                    type="submit"
+                >
+                    ANALYZE <span>→</span>
+                </button>
+            </div>
+
+        </form>
+
+        <div class="scanner-hint">
+            <span>ⓘ</span>
+            Include the full address for the most accurate inspection.
+        </div>
+
+        <div class="scan-progress" id="scan-progress">
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <!-- RISK SCORE -->
+    <div class="panel score-panel" id="result">
+
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">02 / CURRENT ASSESSMENT</span>
+                <h2>Threat score</h2>
+            </div>
+
+            <span class="score-live">LATEST SCAN</span>
+        </div>
+
+        <div class="score-content">
+
+            <div class="score-dial" id="score-dial">
+                <div>
+                    <strong id="risk-score">--</strong>
+                    <small> / 100</small>
+                </div>
+            </div>
+
+            <div class="score-copy">
+                <span class="eyebrow">SCAN STATUS</span>
+
+                <h3 id="status-text">AWAITING INPUT</h3>
+
+                <p id="result-message">
+                    Your scan assessment will appear here once a URL has been analyzed.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mini-scale">
+            <div class="scale-track">
+                <span id="score-bar"></span>
+            </div>
+
+            <div class="scale-labels">
+                <span>LOW</span>
+                <span>MODERATE</span>
+                <span>HIGH</span>
+            </div>
+        </div>
+
+        <div class="score-meta">
+            <span>RISK INDEX</span>
+            <b id="graph-score-label">NO DATA</b>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INSPECTION CHECKS -->
+<section class="panel checks-panel">
+
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">03 / SECURITY ANALYSIS</span>
+            <h2>Inspection checks</h2>
+            <p class="muted">
+                Six security signals examined during URL analysis.
+            </p>
+        </div>
+
+        <span class="subtle-count">06 CHECKS</span>
+    </div>
+
+
+    <div class="inspection-grid">
+
+        <!-- URL LENGTH -->
+        <article class="inspection-card" id="check-length">
+
+            <div class="check-top">
+                <span class="check-name">URL LENGTH</span>
+                <span class="check-icon">↗</span>
+            </div>
+
+            <div class="check-status" id="length-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="length-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="length-explanation">
+                Checks whether the URL exceeds the expected length.
+                Unusually long URLs can sometimes hide suspicious components.
+            </p>
+
+        </article>
+
+
+        <!-- IP ADDRESS -->
+        <article class="inspection-card" id="check-ip">
+
+            <div class="check-top">
+                <span class="check-name">IP ADDRESS</span>
+                <span class="check-icon">⌖</span>
+            </div>
+
+            <div class="check-status" id="ip-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="ip-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="ip-explanation">
+                Checks whether the URL uses an IP address instead of a
+                recognizable domain name.
+            </p>
+
+        </article>
+
+
+        <!-- AT SYMBOL -->
+        <article class="inspection-card" id="check-at">
+
+            <div class="check-top">
+                <span class="check-name">AT SYMBOL</span>
+                <span class="check-icon">@</span>
+            </div>
+
+            <div class="check-status" id="at-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="at-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="at-explanation">
+                Checks for an @ symbol in the URL authority, which can
+                disguise the actual destination.
+            </p>
+
+        </article>
+
+
+        <!-- HTTPS -->
+        <article class="inspection-card" id="check-https">
+
+            <div class="check-top">
+                <span class="check-name">HTTPS PROTOCOL</span>
+                <span class="check-icon">⌑</span>
+            </div>
+
+            <div class="check-status" id="https-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="https-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="https-explanation">
+                Checks whether the website uses HTTPS encryption
+                for communication between the browser and server.
+            </p>
+
+        </article>
+
+
+        <!-- DOMAIN AGE -->
+        <article class="inspection-card" id="check-age">
+
+            <div class="check-top">
+                <span class="check-name">DOMAIN AGE</span>
+                <span class="check-icon">◷</span>
+            </div>
+
+            <div class="check-status" id="age-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="age-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="age-explanation">
+                Checks domain registration information using RDAP.
+                Newly registered domains may require additional caution.
+            </p>
+
+        </article>
+
+
+        <!-- VIRUSTOTAL -->
+        <article class="inspection-card" id="check-vt">
+
+            <div class="check-top">
+                <span class="check-name">VIRUSTOTAL</span>
+                <span class="check-icon">◎</span>
+            </div>
+
+            <div class="check-status" id="vt-status">
+                WAITING
+            </div>
+
+            <p class="check-value" id="vt-value">
+                Not inspected
+            </p>
+
+            <p class="check-explanation" id="vt-explanation">
+                Checks available VirusTotal threat intelligence
+                and malicious or suspicious detections.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- FINDINGS -->
+<section class="lower-grid">
+
+    <div class="panel findings-panel">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">04 / ANALYST NOTES</span>
+                <h2>Findings</h2>
+            </div>
+
+            <span class="subtle-count">SCAN OUTPUT</span>
+        </div>
+
+        <div id="findings-list" class="findings-list">
+
+            <div class="empty-state">
+                <span>⌁</span>
+                <p>No findings yet.</p>
+                <small>
+                    Run a URL inspection to populate this panel.
+                </small>
+            </div>
+
+        </div>
+
+        <a class="text-link" href="{{ url_for('analytics') }}">
+            VIEW ANALYTICS <span>↗</span>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script
+    src="{{ url_for('static', filename='js/dashboard.js') }}"
+    defer>
+</script>
+{% endblock %}
